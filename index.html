@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8fc">
+  <meta name="description" content="Portfolio de Mouhamed Faye, étudiant en cybersécurité et développeur web en apprentissage. Découvrez ses compétences et projets.">
+  <title>Mouhamed Faye — Portfolio</title>
+  <style>
+    :root {
+      --bg: #f7f8fc;
+      --surface: #fff;
+      --surface-2: #f0f4ff;
+      --text: #172033;
+      --muted: #68738a;
+      --line: #e4e8f1;
+      --accent: #6257e8;
+      --accent-2: #8379ff;
+      --accent-soft: #eeecff;
+      --green: #1d9b76;
+      --shadow: 0 18px 50px rgba(29, 37, 75, .08);
+      --radius: 22px;
+    }
+    [data-theme="dark"] {
+      --bg: #0d1220;
+      --surface: #151c2d;
+      --surface-2: #1d2540;
+      --text: #f0f3ff;
+      --muted: #a5aec5;
+      --line: #2a334b;
+      --accent: #a49cff;
+      --accent-2: #c1bbff;
+      --accent-soft: #292648;
+      --green: #62d7b2;
+      --shadow: 0 18px 50px rgba(0, 0, 0, .22);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 95px; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font: 16px/1.7 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      transition: background .2s, color .2s;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .container { width: min(1120px, calc(100% - 44px)); margin-inline: auto; }
+    .site-header {
+      position: sticky; top: 0; z-index: 20; backdrop-filter: blur(16px);
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      border-bottom: 1px solid color-mix(in srgb, var(--line) 75%, transparent);
+    }
+    .nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 850; letter-spacing: -.6px; font-size: 19px; white-space: nowrap; }
+    .brand-mark {
+      display: grid; place-items: center; width: 39px; height: 39px; border-radius: 13px;
+      color: white; background: linear-gradient(135deg, var(--accent), #9b6cff); font-size: 14px;
+      box-shadow: 0 7px 18px rgba(98,87,232,.25);
+    }
+    .nav-links { display: flex; align-items: center; gap: 7px; }
+    .nav-links a { padding: 9px 13px; border-radius: 11px; color: var(--muted); font-size: 14px; font-weight: 650; transition: .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); background: var(--accent-soft); }
+    .nav-actions { display: flex; align-items: center; gap: 9px; }
+    .icon-btn, .menu-btn {
+      display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid var(--line);
+      border-radius: 13px; background: var(--surface); color: var(--text);
+    }
+    .menu-btn { display: none; font-size: 20px; }
+    .hero { padding: 76px 0 66px; min-height: 650px; display: flex; align-items: center; }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 60px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--accent); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.3px; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px color-mix(in srgb, var(--green) 15%, transparent); }
+    h1 { margin: 18px 0 20px; font-size: clamp(43px, 6.2vw, 76px); line-height: 1.05; letter-spacing: -3.8px; font-weight: 850; }
+    h1 .accent-text { display: block; color: var(--accent); }
+    .hero-copy { max-width: 630px; color: var(--muted); font-size: 18px; margin: 0 0 27px; }
+    .hero-copy strong { color: var(--text); }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 47px; padding: 12px 18px; border: 1px solid var(--line); border-radius: 13px; background: var(--surface); color: var(--text); font-weight: 750; font-size: 14px; transition: transform .2s, box-shadow .2s, border-color .2s; }
+    .btn:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: var(--shadow); }
+    .btn-primary { color: #fff; border-color: transparent; background: linear-gradient(135deg, var(--accent), #8a63ee); box-shadow: 0 10px 22px rgba(98,87,232,.22); }
+    [data-theme="dark"] .btn-primary { color: #11152a; }
+    .social-row { display: flex; align-items: center; flex-wrap: wrap; gap: 17px; margin-top: 30px; color: var(--muted); font-size: 13px; }
+    .social-row a { font-weight: 750; color: var(--text); }
+    .social-row a:hover { color: var(--accent); }
+    .hero-art { position: relative; display: grid; place-items: center; min-height: 390px; }
+    .orb { position: absolute; width: 330px; height: 330px; border-radius: 50%; background: linear-gradient(145deg, #d9d5ff, #e5f1ff 60%, #f8dfff); opacity: .9; }
+    [data-theme="dark"] .orb { opacity: .2; }
+    .profile-card { position: relative; z-index: 1; width: min(100%, 330px); padding: 28px; border: 1px solid color-mix(in srgb, var(--line) 80%, white); border-radius: 28px; background: color-mix(in srgb, var(--surface) 88%, transparent); box-shadow: var(--shadow); backdrop-filter: blur(15px); transform: rotate(2deg); }
+    .avatar { display: grid; place-items: center; width: 105px; height: 105px; margin: 2px auto 18px; border-radius: 31px; background: linear-gradient(135deg, var(--accent), #b36bf3); color: white; font-size: 34px; font-weight: 850; box-shadow: 0 14px 30px rgba(98,87,232,.28); }
+    .profile-card h2 { text-align: center; margin: 0; font-size: 22px; letter-spacing: -.7px; }
+    .profile-card > p { text-align: center; margin: 4px 0 21px; color: var(--muted); font-size: 13px; }
+    .profile-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .meta-item { padding: 13px 12px; border-radius: 14px; background: var(--surface-2); }
+    .meta-item strong { display: block; font-size: 17px; }
+    .meta-item span { color: var(--muted); font-size: 11px; }
+    .floating-tag { position: absolute; z-index: 2; padding: 10px 14px; border: 1px solid var(--line); border-radius: 13px; background: var(--surface); box-shadow: var(--shadow); font-size: 12px; font-weight: 800; }
+    .tag-one { top: 39px; left: -5px; transform: rotate(-6deg); }
+    .tag-two { bottom: 44px; right: -7px; transform: rotate(5deg); }
+    .section { padding: 75px 0; }
+    .section-alt { background: var(--surface-2); }
+    .section-head { max-width: 680px; margin: 0 auto 38px; text-align: center; }
+    .section-head h2 { margin: 10px 0 12px; font-size: clamp(30px, 4vw, 43px); line-height: 1.15; letter-spacing: -1.8px; }
+    .section-head p { margin: 0; color: var(--muted); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 17px; }
+    .skill-card, .project-card, .timeline-card, .contact-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; transition: transform .2s, border-color .2s, box-shadow .2s; }
+    .skill-card:hover, .project-card:hover { transform: translateY(-5px); border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); box-shadow: var(--shadow); }
+    .skill-icon { display: grid; place-items: center; width: 47px; height: 47px; margin-bottom: 17px; border-radius: 15px; background: var(--accent-soft); color: var(--accent); font-size: 22px; font-weight: 800; }
+    .skill-card h3, .project-card h3 { margin: 0 0 8px; font-size: 18px; letter-spacing: -.4px; }
+    .skill-card p, .project-card p { margin: 0; color: var(--muted); font-size: 14px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 17px; }
+    .chips span { padding: 5px 9px; border-radius: 8px; background: var(--surface-2); color: var(--muted); font-size: 11px; font-weight: 750; }
+    .projects-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+    .project-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; margin-bottom: 20px; }
+    .project-symbol { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 16px; background: var(--accent-soft); color: var(--accent); font-size: 20px; font-weight: 850; }
+    .project-type { display: inline-block; padding: 5px 9px; border-radius: 8px; background: var(--surface-2); color: var(--muted); font-size: 11px; font-weight: 800; }
+    .project-card h3 { font-size: 21px; }
+    .project-card p { min-height: 48px; }
+    .project-links { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: 20px; padding-top: 17px; border-top: 1px solid var(--line); }
+    .text-link { color: var(--accent); border: 0; background: none; padding: 0; font-weight: 800; font-size: 13px; }
+    .text-link:hover { text-decoration: underline; }
+    .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 35px; align-items: start; }
+    .about-panel { padding: 30px; border-radius: var(--radius); background: linear-gradient(145deg, var(--accent), #8869ef); color: white; }
+    .about-panel h3 { margin: 0 0 12px; font-size: 25px; line-height: 1.2; letter-spacing: -.7px; }
+    .about-panel p { color: rgba(255,255,255,.82); font-size: 14px; margin: 0; }
+    .timeline { display: grid; gap: 14px; }
+    .timeline-card { display: flex; gap: 15px; padding: 19px; }
+    .timeline-mark { flex: 0 0 12px; height: 12px; margin-top: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px var(--accent-soft); }
+    .timeline-card h3 { margin: 0 0 4px; font-size: 16px; }
+    .timeline-card p { margin: 0; color: var(--muted); font-size: 13px; }
+    .contact-wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: 20px; }
+    .contact-intro { padding: 30px 10px 30px 0; }
+    .contact-intro h2 { margin: 10px 0 13px; font-size: clamp(30px, 4vw, 42px); line-height: 1.15; letter-spacing: -1.5px; }
+    .contact-intro p { color: var(--muted); }
+    .contact-list { display: grid; gap: 11px; }
+    .contact-item { display: flex; align-items: center; gap: 13px; padding: 15px; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); overflow-wrap: anywhere; }
+    .contact-item:hover { border-color: var(--accent); }
+    .contact-icon { display: grid; place-items: center; flex: 0 0 42px; height: 42px; border-radius: 13px; background: var(--accent-soft); color: var(--accent); font-weight: 850; }
+    .contact-item strong { display: block; font-size: 13px; }
+    .contact-item small { display: block; color: var(--muted); font-size: 12px; }
+    footer { border-top: 1px solid var(--line); padding: 25px 0; color: var(--muted); font-size: 12px; }
+    .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Fenêtre élégante « À propos du projet » */
+    .project-modal { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 20px; opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility .25s ease; }
+    .project-modal.is-open { opacity: 1; visibility: visible; }
+    .project-modal-backdrop { position: absolute; inset: 0; background: rgba(10, 13, 30, .68); backdrop-filter: blur(9px); }
+    .project-modal-panel { position: relative; width: min(100%, 560px); max-height: min(88vh, 760px); overflow: auto; border: 1px solid color-mix(in srgb, var(--line) 75%, transparent); border-radius: 28px; background: var(--surface); color: var(--text); box-shadow: 0 30px 100px rgba(0,0,0,.35); transform: translateY(18px) scale(.97); transition: transform .28s cubic-bezier(.2,.8,.2,1); }
+    .project-modal.is-open .project-modal-panel { transform: translateY(0) scale(1); }
+    .modal-hero { position: relative; overflow: hidden; padding: 29px 30px 26px; color: #fff; background: linear-gradient(135deg, #6257e8 0%, #8759e8 55%, #c16be8 100%); }
+    .modal-hero::after { content: ''; position: absolute; width: 210px; height: 210px; border: 1px solid rgba(255,255,255,.2); border-radius: 50%; right: -55px; top: -100px; box-shadow: 0 0 0 24px rgba(255,255,255,.06), 0 0 0 50px rgba(255,255,255,.04); }
+    .modal-topline { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 25px; }
+    .modal-kicker { font-size: 11px; font-weight: 850; letter-spacing: 1.7px; text-transform: uppercase; opacity: .85; }
+    .modal-close { position: relative; z-index: 2; display: grid; place-items: center; width: 39px; height: 39px; flex: 0 0 39px; border: 1px solid rgba(255,255,255,.32); border-radius: 13px; background: rgba(255,255,255,.14); color: white; font-size: 25px; line-height: 1; transition: background .2s, transform .2s; }
+    .modal-close:hover { background: rgba(255,255,255,.25); transform: rotate(90deg); }
+    .modal-title-row { position: relative; z-index: 1; display: flex; align-items: center; gap: 16px; }
+    .modal-project-symbol { display: grid; place-items: center; width: 66px; height: 66px; flex: 0 0 66px; border: 1px solid rgba(255,255,255,.28); border-radius: 20px; background: rgba(255,255,255,.16); font-size: 25px; font-weight: 900; box-shadow: inset 0 1px 0 rgba(255,255,255,.15); }
+    .modal-title-row h2 { margin: 0 0 5px; font-size: clamp(24px, 5vw, 32px); line-height: 1.15; letter-spacing: -1px; }
+    .modal-category { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 750; opacity: .86; }
+    .modal-content { padding: 27px 30px 30px; }
+    .modal-section-label { margin: 0 0 9px; color: var(--accent); font-size: 11px; font-weight: 900; letter-spacing: 1.3px; text-transform: uppercase; }
+    .modal-description { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.8; }
+    .modal-divider { height: 1px; margin: 23px 0; background: var(--line); }
+    .modal-features { display: flex; flex-wrap: wrap; gap: 8px; }
+    .modal-features span { display: inline-flex; align-items: center; gap: 7px; padding: 8px 11px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface-2); color: var(--text); font-size: 12px; font-weight: 750; }
+    .modal-features span::before { content: '✓'; color: var(--green); font-weight: 900; }
+    .modal-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 27px; }
+    .modal-note { color: var(--muted); font-size: 11px; }
+    .modal-actions { display: flex; flex-wrap: wrap; gap: 9px; }
+    .modal-actions .btn { min-height: 43px; }
+    @media (max-width: 520px) { .project-modal { padding: 12px; } .project-modal-panel { border-radius: 23px; max-height: 92vh; } .modal-hero { padding: 23px 21px 22px; } .modal-content { padding: 23px 21px 24px; } .modal-title-row { gap: 12px; } .modal-project-symbol { width: 55px; height: 55px; flex-basis: 55px; border-radius: 16px; } .modal-footer { align-items: stretch; } .modal-actions { width: 100%; } .modal-actions .btn { flex: 1; } }
+    @media (prefers-reduced-motion: reduce) { .project-modal, .project-modal-panel, .modal-close { transition: none; } }
+
+
+
+    /* Finitions responsive et cartes de compétences interactives */
+    .skill-card-button { width: 100%; text-align: left; color: var(--text); font: inherit; cursor: pointer; display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+    .skill-card-button .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 17px; }
+    .skill-more { display: inline-flex; gap: 7px; align-items: center; margin-top: 18px; color: var(--accent); font-size: 12px; font-weight: 800; }
+    .skill-card-button:focus-visible, .text-link:focus-visible, .btn:focus-visible, .icon-btn:focus-visible, .menu-btn:focus-visible, .modal-close:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 3px; }
+    .container { width: min(1120px, calc(100% - 48px)); }
+    .section { padding-block: clamp(62px, 7vw, 92px); }
+    .section-head { margin-bottom: clamp(28px, 4vw, 44px); }
+    .skill-card, .project-card, .timeline-card, .contact-card { padding: clamp(21px, 2.6vw, 28px); }
+    .project-modal-panel { overscroll-behavior: contain; }
+    body.modal-open { overflow: hidden; }
+    @media (max-width: 650px) {
+      .container { width: min(100% - 32px, 540px); }
+      .nav { gap: 10px; }
+      .brand { font-size: 16px; gap: 8px; }
+      .brand-mark { width: 35px; height: 35px; }
+      .nav-actions { gap: 7px; }
+      .icon-btn, .menu-btn { width: 40px; height: 40px; }
+      .hero-art { max-width: 100%; }
+      .floating-tag { max-width: 48%; font-size: 11px; }
+      .project-top { gap: 10px; }
+    }
+    @media (max-width: 380px) {
+      .container { width: calc(100% - 26px); }
+      h1 { letter-spacing: -2px; }
+      .profile-meta { gap: 7px; }
+      .meta-item { padding: 11px 9px; }
+      .modal-title-row { align-items: flex-start; }
+      .modal-title-row h2 { overflow-wrap: anywhere; }
+      .modal-actions { flex-direction: column; }
+    }
+
+    @media (max-width: 850px) {
+      .hero { min-height: auto; padding: 60px 0 50px; }
+      .hero-grid { grid-template-columns: 1fr .8fr; gap: 25px; }
+      .hero-art { min-height: 330px; }
+      .orb { width: 260px; height: 260px; }
+      .profile-card { padding: 21px; }
+      .skills-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .about-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+    }
+    @media (max-width: 650px) {
+      .container { width: min(100% - 30px, 540px); }
+      .nav { min-height: 68px; }
+      .menu-btn { display: grid; }
+      .nav-links {
+        display: none; position: absolute; top: 68px; left: 15px; right: 15px; padding: 12px;
+        background: var(--surface); border: 1px solid var(--line); border-radius: 17px; box-shadow: var(--shadow);
+        flex-direction: column; align-items: stretch; gap: 3px;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px; }
+      .hero { padding: 48px 0 55px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 18px; }
+      h1 { font-size: clamp(43px, 13vw, 61px); letter-spacing: -2.7px; }
+      .hero-copy { font-size: 16px; }
+      .hero-art { min-height: 340px; margin-top: 8px; }
+      .orb { width: 270px; height: 270px; }
+      .profile-card { max-width: 300px; }
+      .tag-one { left: 1px; top: 26px; }
+      .tag-two { right: 0; bottom: 27px; }
+      .section { padding: 58px 0; }
+      .section-head { margin-bottom: 27px; text-align: left; }
+      .skills-grid, .projects-grid, .about-grid, .contact-wrap { grid-template-columns: 1fr; }
+      .skill-card, .project-card { padding: 21px; }
+      .project-card p { min-height: 0; }
+      .about-panel { padding: 25px; }
+      .contact-intro { padding: 0; }
+      .footer-inner { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Navigation principale">
+      <a class="brand" href="#accueil" aria-label="Mouhamed Faye, accueil">
+        <span class="brand-mark">MF</span><span>Mouhamed Faye<span style="color:var(--accent)">.</span></span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#accueil" class="active">Accueil</a>
+        <a href="#competences">Compétences</a>
+        <a href="#projets">Projets</a>
+        <a href="#parcours">Parcours</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeButton" type="button" aria-label="Changer de thème" title="Changer de thème">☾</button>
+        <button class="menu-btn" id="menuButton" type="button" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="accueil">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="eyebrow"><span class="status-dot"></span> Portfolio personnel</div>
+          <h1>Salut, moi c'est <span class="accent-text">Mouhamed Faye.</span></h1>
+          <p class="hero-copy">
+            Étudiant en <strong>cybersécurité</strong>, passionné par les réseaux,
+            l'informatique et le développement web. J'apprends en construisant des projets
+            concrets et en transformant mes idées en outils utiles.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#projets">Découvrir mes projets <span>↗</span></a>
+            <a class="btn" href="#contact">Me contacter <span>→</span></a>
+          </div>
+          <div class="social-row">
+            <span>Retrouve-moi sur</span>
+            <a href="https://github.com/poolemedzo-create" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <a href="https://www.linkedin.com/in/bambaa24" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="Carte de présentation de Mouhamed Faye">
+          <div class="orb"></div>
+          <div class="floating-tag tag-one">⌘ Développement web</div>
+          <div class="profile-card">
+            <div class="avatar" aria-hidden="true">MF</div>
+            <h2>Mouhamed Faye</h2>
+            <p>Étudiant · Cybersécurité</p>
+            <div class="profile-meta">
+              <div class="meta-item"><strong>Web</strong><span>Projets & interfaces</span></div>
+              <div class="meta-item"><strong>Cyber</strong><span>En apprentissage</span></div>
+            </div>
+          </div>
+          <div class="floating-tag tag-two">✦ Apprendre en pratiquant</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="competences">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Mon savoir-faire</div>
+          <h2>Compétences & domaines</h2>
+          <p>Les domaines que j'explore et les outils que je mobilise dans mes projets et mes exercices pratiques.</p>
+        </div>
+        <div class="skills-grid">
+          <button class="skill-card skill-card-button reveal" type="button" data-details="skill-dev" aria-haspopup="dialog">
+            <span class="skill-icon" aria-hidden="true">⌘</span><h3>Développement</h3>
+            <p>Bases en langage C et apprentissage progressif du développement web. HTML, CSS et JavaScript sont en cours d’apprentissage.</p>
+            <span class="chips"><span>Langage C</span><span>HTML · apprentissage</span><span>CSS · apprentissage</span><span>JavaScript · apprentissage</span></span>
+            <span class="skill-more">Voir les détails <span aria-hidden="true">↗</span></span>
+          </button>
+          <button class="skill-card skill-card-button reveal" type="button" data-details="skill-cyber" aria-haspopup="dialog">
+            <span class="skill-icon" aria-hidden="true">⌁</span><h3>Cybersécurité & réseaux</h3>
+            <p>Exploration des réseaux et de la sécurité informatique, avec une pratique approfondie de Nmap pour la reconnaissance et l’analyse de réseaux dans un cadre autorisé.</p>
+            <span class="chips"><span>Nmap · avancé</span><span>Réseaux</span><span>Reconnaissance</span></span>
+            <span class="skill-more">Voir les détails <span aria-hidden="true">↗</span></span>
+          </button>
+          <button class="skill-card skill-card-button reveal" type="button" data-details="skill-design" aria-haspopup="dialog">
+            <span class="skill-icon" aria-hidden="true">✦</span><h3>Design graphique</h3>
+            <p>Création d’affiches et de logos. Utilisation de Photoshop à un niveau intermédiaire pour préparer et retoucher des visuels.</p>
+            <span class="chips"><span>Affiches</span><span>Logos</span><span>Photoshop · intermédiaire</span></span>
+            <span class="skill-more">Voir les détails <span aria-hidden="true">↗</span></span>
+          </button>
+          <button class="skill-card skill-card-button reveal" type="button" data-details="skill-office" aria-haspopup="dialog">
+            <span class="skill-icon" aria-hidden="true">▤</span><h3>Bureautique</h3>
+            <p>Bonne maîtrise de Microsoft Word et PowerPoint pour produire des documents et des présentations. Excel reste un axe de progression.</p>
+            <span class="chips"><span>Word · bonne maîtrise</span><span>PowerPoint · bonne maîtrise</span><span>Excel · à améliorer</span></span>
+            <span class="skill-more">Voir les détails <span aria-hidden="true">↗</span></span>
+          </button>
+          <button class="skill-card skill-card-button reveal" type="button" data-details="skill-video" aria-haspopup="dialog">
+            <span class="skill-icon" aria-hidden="true">▶</span><h3>Montage vidéo</h3>
+            <p>Montage et édition de vidéos, avec une attention portée à l’enchaînement des séquences et à la cohérence du rendu.</p>
+            <span class="chips"><span>Montage</span><span>Édition vidéo</span></span>
+            <span class="skill-more">Voir les détails <span aria-hidden="true">↗</span></span>
+          </button>
+          <button class="skill-card skill-card-button reveal" type="button" data-details="skill-community" aria-haspopup="dialog">
+            <span class="skill-icon" aria-hidden="true">◎</span><h3>Community management</h3>
+            <p>Gestion de comptes et de pages sur les réseaux sociaux : organisation des publications et suivi de la présence en ligne.</p>
+            <span class="chips"><span>Réseaux sociaux</span><span>Gestion de pages</span></span>
+            <span class="skill-more">Voir les détails <span aria-hidden="true">↗</span></span>
+          </button>
+          <button class="skill-card skill-card-button reveal" type="button" data-details="skill-teaching" aria-haspopup="dialog">
+            <span class="skill-icon" aria-hidden="true">↗</span><h3>Formation & transmission</h3>
+            <p>Capacité à expliquer et enseigner les notions maîtrisées, en avançant étape par étape avec des exemples pratiques.</p>
+            <span class="chips"><span>Pédagogie</span><span>Explications</span><span>Apprentissage pratique</span></span>
+            <span class="skill-more">Voir les détails <span aria-hidden="true">↗</span></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projets">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Ce que je construis</div>
+          <h2>Quelques projets</h2>
+          <p>Des réalisations web et éducatives qui illustrent mon envie d'apprendre et de créer.</p>
+        </div>
+        <div class="projects-grid">
+          <article class="project-card reveal">
+            <div class="project-top"><div class="project-symbol">D</div><span class="project-type">E-commerce</span></div>
+            <h3>DOXANTUU</h3>
+            <p>Une boutique de chaussures en ligne que je développe et améliore progressivement.</p>
+            <div class="chips"><span>Site web</span><span>Commerce</span><span>Interface admin</span></div>
+            <div class="project-links"><button class="text-link" data-details="doxantuu">À propos du projet ↗</button><a class="btn" href="https://doxantuu.netlify.app/" target="_blank" rel="noopener noreferrer">Visiter le site ↗</a></div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-top"><div class="project-symbol">A</div><span class="project-type">Éducation</span></div>
+            <h3>AlgoCLI</h3>
+            <p>Un environnement pédagogique pour apprendre et pratiquer le pseudo-code et l'algorithmique.</p>
+            <div class="chips"><span>Algorithmique</span><span>Pseudo-code</span></div>
+            <div class="project-links"><button class="text-link" data-details="algocli">À propos du projet ↗</button><a class="btn" href="https://algorithme.oneapp.dev/" target="_blank" rel="noopener noreferrer">Visiter le site ↗</a></div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-top"><div class="project-symbol">∑</div><span class="project-type">Apprentissage</span></div>
+            <h3>Analyse SIMAC</h3>
+            <p>Une plateforme pédagogique pour organiser les cours, réviser et pratiquer l'analyse.</p>
+            <div class="chips"><span>Cours</span><span>Exercices</span></div>
+            <div class="project-links"><button class="text-link" data-details="analyse">À propos du projet ↗</button><a class="btn" href="https://analyse_simac.oneapp.dev/" target="_blank" rel="noopener noreferrer">Visiter le site ↗</a></div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-top"><div class="project-symbol">01</div><span class="project-type">Informatique</span></div>
+            <h3>Architecture des ordinateurs</h3>
+            <p>Un espace d'apprentissage consacré à l'architecture informatique et aux représentations numériques.</p>
+            <div class="chips"><span>Binaire</span><span>Architecture</span></div>
+            <div class="project-links"><button class="text-link" data-details="architecture">À propos du projet ↗</button><a class="btn" href="https://architecture_des_ordinateurs.oneapp.dev/" target="_blank" rel="noopener noreferrer">Visiter le site ↗</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="parcours">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Mon chemin</div>
+          <h2>Parcours & objectifs</h2>
+          <p>Un parcours guidé par la curiosité, la pratique et l'envie de progresser dans les métiers du numérique.</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-panel reveal">
+            <h3>Comprendre. Construire. Sécuriser.</h3>
+            <p>Je m'intéresse autant à la création d'applications web qu'au fonctionnement des systèmes et des réseaux. Mon objectif est de consolider mes bases et de faire évoluer mes projets au fil de mes apprentissages.</p>
+          </div>
+          <div class="timeline">
+            <article class="timeline-card reveal"><span class="timeline-mark"></span><div><h3>Études en cybersécurité</h3><p>Formation et apprentissage des fondamentaux de l'informatique, des réseaux et de la sécurité.</p></div></article>
+            <article class="timeline-card reveal"><span class="timeline-mark"></span><div><h3>Développement web</h3><p>Apprentissage progressif de HTML, CSS et JavaScript à travers des projets concrets.</p></div></article>
+            <article class="timeline-card reveal"><span class="timeline-mark"></span><div><h3>Projets personnels</h3><p>Création et amélioration de sites web, d'outils pédagogiques et d'interfaces utiles.</p></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container contact-wrap">
+        <div class="contact-intro reveal">
+          <div class="eyebrow">Entrons en contact</div>
+          <h2>Une idée ou un projet ?</h2>
+          <p>Tu souhaites échanger à propos du développement web, de mes projets ou de mon parcours ? Tu peux me retrouver ici.</p>
+          <a class="btn btn-primary" href="https://wa.me/221777562403" target="_blank" rel="noopener noreferrer">M'écrire sur WhatsApp ↗</a>
+        </div>
+        <div class="contact-list reveal">
+          <a class="contact-item" href="tel:+221777562403"><span class="contact-icon">☎</span><span><strong>Téléphone</strong><small>+221 77 756 24 03</small></span></a>
+          <a class="contact-item" href="https://wa.me/221777562403" target="_blank" rel="noopener noreferrer"><span class="contact-icon">W</span><span><strong>WhatsApp</strong><small>Envoyer un message</small></span></a>
+          <a class="contact-item" href="https://github.com/poolemedzo-create" target="_blank" rel="noopener noreferrer"><span class="contact-icon">GH</span><span><strong>GitHub</strong><small>poolemedzo-create</small></span></a>
+          <a class="contact-item" href="https://www.linkedin.com/in/bambaa24" target="_blank" rel="noopener noreferrer"><span class="contact-icon">in</span><span><strong>LinkedIn</strong><small>Retrouver mon profil</small></span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <div class="project-modal" id="projectModal" aria-hidden="true">
+    <div class="project-modal-backdrop" data-close-modal></div>
+    <section class="project-modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalProjectTitle" aria-describedby="modalProjectDescription" tabindex="-1">
+      <div class="modal-hero">
+        <div class="modal-topline"><span class="modal-kicker">Dans les coulisses du projet</span><button class="modal-close" type="button" aria-label="Fermer la fenêtre" data-close-modal>×</button></div>
+        <div class="modal-title-row"><div class="modal-project-symbol" id="modalProjectSymbol">D</div><div><h2 id="modalProjectTitle">Nom du projet</h2><span class="modal-category" id="modalProjectCategory">Projet web</span></div></div>
+      </div>
+      <div class="modal-content">
+        <p class="modal-section-label">L'idée derrière le projet</p>
+        <p class="modal-description" id="modalProjectDescription"></p>
+        <div class="modal-divider"></div>
+        <p class="modal-section-label">Ce que l'on y retrouve</p>
+        <div class="modal-features" id="modalProjectFeatures"></div>
+        <div class="modal-footer"><span class="modal-note" id="modalProjectNote">Un projet qui évolue avec la pratique ✦</span><div class="modal-actions"><button class="btn" type="button" data-close-modal>Fermer</button><a class="btn btn-primary" id="modalProjectVisit" href="#" target="_blank" rel="noopener noreferrer">Découvrir le projet ↗</a></div></div>
+      </div>
+    </section>
+  </div>
+
+  <footer><div class="container footer-inner"><span>© <span id="year"></span> Mouhamed Faye. Tous droits réservés.</span><span>Portfolio personnel · Cybersécurité & développement web</span></div></footer>
+
+  <script>
+    const root = document.documentElement;
+    const themeButton = document.getElementById('themeButton');
+    const menuButton = document.getElementById('menuButton');
+    const navLinks = document.getElementById('navLinks');
+
+    let savedTheme = 'light';
+    try { savedTheme = localStorage.getItem('portfolio-theme') || 'light'; } catch (_) {}
+    setTheme(savedTheme);
+
+    function setTheme(theme) {
+      root.dataset.theme = theme;
+      themeButton.textContent = theme === 'dark' ? '☀' : '☾';
+      themeButton.setAttribute('aria-label', theme === 'dark' ? 'Activer le thème clair' : 'Activer le thème sombre');
+      const metaTheme = document.querySelector('meta[name="theme-color"]');
+      if (metaTheme) metaTheme.content = theme === 'dark' ? '#0d1220' : '#f7f8fc';
+      try { localStorage.setItem('portfolio-theme', theme); } catch (_) {}
+    }
+    themeButton.addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+
+    menuButton.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.textContent = isOpen ? '×' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.textContent = '☰';
+      });
+    });
+
+    const sectionLinks = [...navLinks.querySelectorAll('a')];
+    const sections = sectionLinks.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+    if ('IntersectionObserver' in window) {
+      const navObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            sectionLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id));
+          }
+        });
+      }, { rootMargin: '-30% 0px -60% 0px' });
+      sections.forEach(section => navObserver.observe(section));
+      const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }
+
+    const projectDetails = {
+      doxantuu: { title: 'DOXANTUU', symbol: 'D', category: 'E-commerce · Boutique en ligne', description: 'DOXANTUU est une boutique de chaussures en ligne que je développe et améliore progressivement. L’objectif est de proposer une expérience d’achat claire, agréable sur mobile comme sur ordinateur, et une interface de gestion adaptée à la boutique.', features: ['Catalogue de chaussures', 'Expérience responsive', 'Interface d’administration', 'Projet en évolution'], url: 'https://doxantuu.netlify.app/' },
+      algocli: { title: 'AlgoCLI', symbol: 'A', category: 'Éducation · Algorithmique', description: 'AlgoCLI est un projet pédagogique pensé pour rendre l’apprentissage de l’algorithmique et du pseudo-code plus pratique. Il sert de support pour s’entraîner, tester sa compréhension et progresser étape par étape.', features: ['Algorithmique', 'Pseudo-code', 'Apprentissage pratique', 'Exercices'], url: 'https://algorithme.oneapp.dev/' },
+      analyse: { title: 'Analyse SIMAC', symbol: '∑', category: 'Éducation · Analyse', description: 'Analyse SIMAC est une plateforme pédagogique conçue pour faciliter l’accès aux contenus de cours et aux exercices d’analyse. Le projet vise à réunir les ressources utiles dans un espace organisé pour accompagner les révisions.', features: ['Cours regroupés', 'Exercices d’analyse', 'Révisions', 'Organisation des ressources'], url: 'https://analyse_simac.oneapp.dev/' },
+      'skill-dev': { title: 'Développement', symbol: '</>', category: 'Compétence · En apprentissage', description: 'Je possède des bases en langage C et je développe progressivement mes compétences en création web. HTML, CSS et JavaScript sont des technologies que je suis encore en train d’apprendre et de pratiquer à travers mes projets.', features: ['Langage C', 'HTML · apprentissage', 'CSS · apprentissage', 'JavaScript · apprentissage'], url: 'https://portfolio1-omega-opal.vercel.app/' },
+      'skill-cyber': { title: 'Cybersécurité & réseaux', symbol: '⌁', category: 'Compétence · Nmap avancé', description: 'Je m’intéresse à la sécurité informatique et aux réseaux. Nmap est l’outil que je pratique à un niveau avancé pour découvrir les hôtes et analyser les services exposés, uniquement sur des systèmes pour lesquels j’ai une autorisation.', features: ['Nmap · avancé', 'Réseaux', 'Analyse de services', 'Pratique responsable'], url: 'https://portfolio1-omega-opal.vercel.app/' },
+      'skill-design': { title: 'Design graphique', symbol: '✦', category: 'Compétence · Création visuelle', description: 'Je crée des affiches et des logos. J’utilise Photoshop à un niveau intermédiaire pour concevoir, retoucher et organiser des éléments visuels.', features: ['Création d’affiches', 'Création de logos', 'Photoshop · intermédiaire'], url: 'https://portfolio1-omega-opal.vercel.app/' },
+      'skill-office': { title: 'Bureautique', symbol: '▤', category: 'Compétence · Outils bureautiques', description: 'Je maîtrise bien Microsoft Word et PowerPoint pour la rédaction de documents et la création de présentations. Je continue à améliorer mon niveau sur Excel.', features: ['Word · bonne maîtrise', 'PowerPoint · bonne maîtrise', 'Excel · en progression'], url: 'https://portfolio1-omega-opal.vercel.app/' },
+      'skill-video': { title: 'Montage vidéo', symbol: '▶', category: 'Compétence · Audiovisuel', description: 'Je réalise du montage et de l’édition vidéo, en assemblant les séquences et en travaillant la fluidité et la cohérence du résultat.', features: ['Montage vidéo', 'Édition', 'Assemblage de séquences'], url: 'https://portfolio1-omega-opal.vercel.app/' },
+      'skill-community': { title: 'Community management', symbol: '◎', category: 'Compétence · Réseaux sociaux', description: 'Je peux gérer des comptes et des pages sur les réseaux sociaux, organiser les publications et contribuer à maintenir une présence cohérente en ligne.', features: ['Gestion de comptes', 'Gestion de pages', 'Organisation des publications'], url: 'https://portfolio1-omega-opal.vercel.app/' },
+      'skill-teaching': { title: 'Formation & transmission', symbol: '↗', category: 'Compétence · Pédagogie', description: 'Je peux transmettre les notions que je maîtrise en les expliquant étape par étape et en m’appuyant sur des exemples pratiques adaptés au niveau de la personne.', features: ['Explication de notions', 'Exemples pratiques', 'Transmission des connaissances'], url: 'https://portfolio1-omega-opal.vercel.app/' },
+      architecture: { title: 'Architecture des ordinateurs', symbol: '01', category: 'Informatique · Apprentissage', description: 'Cette plateforme rassemble des ressources consacrées à l’architecture des ordinateurs et à la représentation de l’information. Elle accompagne l’apprentissage de notions informatiques à travers des contenus et des exercices.', features: ['Représentation de l’information', 'Systèmes numériques', 'Architecture informatique', 'Support de révision'], url: 'https://architecture_des_ordinateurs.oneapp.dev/' }
+    };
+    const projectModal = document.getElementById('projectModal');
+    const modalPanel = projectModal.querySelector('.project-modal-panel');
+    const modalTitle = document.getElementById('modalProjectTitle');
+    const modalSymbol = document.getElementById('modalProjectSymbol');
+    const modalCategory = document.getElementById('modalProjectCategory');
+    const modalDescription = document.getElementById('modalProjectDescription');
+    const modalFeatures = document.getElementById('modalProjectFeatures');
+    const modalVisit = document.getElementById('modalProjectVisit');
+    const modalNote = document.getElementById('modalProjectNote');
+    let lastModalTrigger = null;
+    function openProjectModal(key, trigger) {
+      const project = projectDetails[key];
+      if (!project) return;
+      lastModalTrigger = trigger;
+      modalTitle.textContent = project.title;
+      modalSymbol.textContent = project.symbol;
+      modalCategory.textContent = project.category;
+      modalDescription.textContent = project.description;
+      modalFeatures.replaceChildren(...project.features.map(feature => {
+        const chip = document.createElement('span');
+        chip.textContent = feature;
+        return chip;
+      }));
+      const isSkill = key.startsWith('skill-');
+      modalVisit.style.display = isSkill ? 'none' : '';
+      modalVisit.setAttribute('aria-hidden', isSkill ? 'true' : 'false');
+      modalNote.textContent = isSkill ? 'Compétence et savoir-faire' : 'Un projet qui évolue avec la pratique ✦';
+      modalVisit.href = project.url;
+      projectModal.classList.add('is-open');
+      projectModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      modalPanel.focus();
+    }
+    function closeProjectModal() {
+      if (!projectModal.classList.contains('is-open')) return;
+      projectModal.classList.remove('is-open');
+      projectModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastModalTrigger) lastModalTrigger.focus();
+    }
+    document.querySelectorAll('[data-details]').forEach(button => {
+      button.addEventListener('click', () => openProjectModal(button.dataset.details, button));
+    });
+    projectModal.querySelectorAll('[data-close-modal]').forEach(element => element.addEventListener('click', closeProjectModal));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeProjectModal();
+      if (event.key === 'Tab' && projectModal.classList.contains('is-open')) {
+        const focusable = [...projectModal.querySelectorAll('button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])')].filter(el => el.offsetParent !== null);
+        if (!focusable.length) return;
+        const first = focusable[0], last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      }
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
