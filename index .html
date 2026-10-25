@@ -141,6 +141,37 @@
     .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Fenêtre élégante « À propos du projet » */
+    .project-modal { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 20px; opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility .25s ease; }
+    .project-modal.is-open { opacity: 1; visibility: visible; }
+    .project-modal-backdrop { position: absolute; inset: 0; background: rgba(10, 13, 30, .68); backdrop-filter: blur(9px); }
+    .project-modal-panel { position: relative; width: min(100%, 560px); max-height: min(88vh, 760px); overflow: auto; border: 1px solid color-mix(in srgb, var(--line) 75%, transparent); border-radius: 28px; background: var(--surface); color: var(--text); box-shadow: 0 30px 100px rgba(0,0,0,.35); transform: translateY(18px) scale(.97); transition: transform .28s cubic-bezier(.2,.8,.2,1); }
+    .project-modal.is-open .project-modal-panel { transform: translateY(0) scale(1); }
+    .modal-hero { position: relative; overflow: hidden; padding: 29px 30px 26px; color: #fff; background: linear-gradient(135deg, #6257e8 0%, #8759e8 55%, #c16be8 100%); }
+    .modal-hero::after { content: ''; position: absolute; width: 210px; height: 210px; border: 1px solid rgba(255,255,255,.2); border-radius: 50%; right: -55px; top: -100px; box-shadow: 0 0 0 24px rgba(255,255,255,.06), 0 0 0 50px rgba(255,255,255,.04); }
+    .modal-topline { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 25px; }
+    .modal-kicker { font-size: 11px; font-weight: 850; letter-spacing: 1.7px; text-transform: uppercase; opacity: .85; }
+    .modal-close { position: relative; z-index: 2; display: grid; place-items: center; width: 39px; height: 39px; flex: 0 0 39px; border: 1px solid rgba(255,255,255,.32); border-radius: 13px; background: rgba(255,255,255,.14); color: white; font-size: 25px; line-height: 1; transition: background .2s, transform .2s; }
+    .modal-close:hover { background: rgba(255,255,255,.25); transform: rotate(90deg); }
+    .modal-title-row { position: relative; z-index: 1; display: flex; align-items: center; gap: 16px; }
+    .modal-project-symbol { display: grid; place-items: center; width: 66px; height: 66px; flex: 0 0 66px; border: 1px solid rgba(255,255,255,.28); border-radius: 20px; background: rgba(255,255,255,.16); font-size: 25px; font-weight: 900; box-shadow: inset 0 1px 0 rgba(255,255,255,.15); }
+    .modal-title-row h2 { margin: 0 0 5px; font-size: clamp(24px, 5vw, 32px); line-height: 1.15; letter-spacing: -1px; }
+    .modal-category { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 750; opacity: .86; }
+    .modal-content { padding: 27px 30px 30px; }
+    .modal-section-label { margin: 0 0 9px; color: var(--accent); font-size: 11px; font-weight: 900; letter-spacing: 1.3px; text-transform: uppercase; }
+    .modal-description { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.8; }
+    .modal-divider { height: 1px; margin: 23px 0; background: var(--line); }
+    .modal-features { display: flex; flex-wrap: wrap; gap: 8px; }
+    .modal-features span { display: inline-flex; align-items: center; gap: 7px; padding: 8px 11px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface-2); color: var(--text); font-size: 12px; font-weight: 750; }
+    .modal-features span::before { content: '✓'; color: var(--green); font-weight: 900; }
+    .modal-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 27px; }
+    .modal-note { color: var(--muted); font-size: 11px; }
+    .modal-actions { display: flex; flex-wrap: wrap; gap: 9px; }
+    .modal-actions .btn { min-height: 43px; }
+    @media (max-width: 520px) { .project-modal { padding: 12px; } .project-modal-panel { border-radius: 23px; max-height: 92vh; } .modal-hero { padding: 23px 21px 22px; } .modal-content { padding: 23px 21px 24px; } .modal-title-row { gap: 12px; } .modal-project-symbol { width: 55px; height: 55px; flex-basis: 55px; border-radius: 16px; } .modal-footer { align-items: stretch; } .modal-actions { width: 100%; } .modal-actions .btn { flex: 1; } }
+    @media (prefers-reduced-motion: reduce) { .project-modal, .project-modal-panel, .modal-close { transition: none; } }
+
     @media (max-width: 850px) {
       .hero { min-height: auto; padding: 60px 0 50px; }
       .hero-grid { grid-template-columns: 1fr .8fr; gap: 25px; }
@@ -364,6 +395,25 @@
     </section>
   </main>
 
+
+  <div class="project-modal" id="projectModal" aria-hidden="true">
+    <div class="project-modal-backdrop" data-close-modal></div>
+    <section class="project-modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalProjectTitle" aria-describedby="modalProjectDescription" tabindex="-1">
+      <div class="modal-hero">
+        <div class="modal-topline"><span class="modal-kicker">Dans les coulisses du projet</span><button class="modal-close" type="button" aria-label="Fermer la fenêtre" data-close-modal>×</button></div>
+        <div class="modal-title-row"><div class="modal-project-symbol" id="modalProjectSymbol">D</div><div><h2 id="modalProjectTitle">Nom du projet</h2><span class="modal-category" id="modalProjectCategory">Projet web</span></div></div>
+      </div>
+      <div class="modal-content">
+        <p class="modal-section-label">L'idée derrière le projet</p>
+        <p class="modal-description" id="modalProjectDescription"></p>
+        <div class="modal-divider"></div>
+        <p class="modal-section-label">Ce que l'on y retrouve</p>
+        <div class="modal-features" id="modalProjectFeatures"></div>
+        <div class="modal-footer"><span class="modal-note">Un projet qui évolue avec la pratique ✦</span><div class="modal-actions"><button class="btn" type="button" data-close-modal>Fermer</button><a class="btn btn-primary" id="modalProjectVisit" href="#" target="_blank" rel="noopener noreferrer">Découvrir le projet ↗</a></div></div>
+      </div>
+    </section>
+  </div>
+
   <footer><div class="container footer-inner"><span>© <span id="year"></span> Mouhamed Faye. Tous droits réservés.</span><span>Portfolio personnel · Cybersécurité & développement web</span></div></footer>
 
   <script>
@@ -424,16 +474,52 @@
     }
 
     const projectDetails = {
-      doxantuu: 'DOXANTUU est une boutique de chaussures en ligne que je fais évoluer progressivement, avec une attention portée à l’expérience de navigation et à la gestion de la boutique.',
-      algocli: 'AlgoCLI est un projet éducatif orienté vers l’apprentissage de l’algorithmique et du pseudo-code à travers des exercices pratiques.',
-      analyse: 'Analyse SIMAC est une plateforme pédagogique destinée à regrouper des contenus de cours et des exercices d’analyse.',
-      architecture: 'Cette plateforme rassemble des ressources d’apprentissage autour de l’architecture des ordinateurs et des représentations numériques.'
+      doxantuu: { title: 'DOXANTUU', symbol: 'D', category: 'E-commerce · Boutique en ligne', description: 'DOXANTUU est une boutique de chaussures en ligne que je développe et améliore progressivement. L’objectif est de proposer une expérience d’achat claire, agréable sur mobile comme sur ordinateur, et une interface de gestion adaptée à la boutique.', features: ['Catalogue de chaussures', 'Expérience responsive', 'Interface d’administration', 'Projet en évolution'], url: 'https://doxantuu.netlify.app/' },
+      algocli: { title: 'AlgoCLI', symbol: 'A', category: 'Éducation · Algorithmique', description: 'AlgoCLI est un projet pédagogique pensé pour rendre l’apprentissage de l’algorithmique et du pseudo-code plus pratique. Il sert de support pour s’entraîner, tester sa compréhension et progresser étape par étape.', features: ['Algorithmique', 'Pseudo-code', 'Apprentissage pratique', 'Exercices'], url: 'https://algorithme.oneapp.dev/' },
+      analyse: { title: 'Analyse SIMAC', symbol: '∑', category: 'Éducation · Analyse', description: 'Analyse SIMAC est une plateforme pédagogique conçue pour faciliter l’accès aux contenus de cours et aux exercices d’analyse. Le projet vise à réunir les ressources utiles dans un espace organisé pour accompagner les révisions.', features: ['Cours regroupés', 'Exercices d’analyse', 'Révisions', 'Organisation des ressources'], url: 'https://analyse_simac.oneapp.dev/' },
+      architecture: { title: 'Architecture des ordinateurs', symbol: '01', category: 'Informatique · Apprentissage', description: 'Cette plateforme rassemble des ressources consacrées à l’architecture des ordinateurs et à la représentation de l’information. Elle accompagne l’apprentissage de notions informatiques à travers des contenus et des exercices.', features: ['Représentation de l’information', 'Systèmes numériques', 'Architecture informatique', 'Support de révision'], url: 'https://architecture_des_ordinateurs.oneapp.dev/' }
     };
+    const projectModal = document.getElementById('projectModal');
+    const modalPanel = projectModal.querySelector('.project-modal-panel');
+    const modalTitle = document.getElementById('modalProjectTitle');
+    const modalSymbol = document.getElementById('modalProjectSymbol');
+    const modalCategory = document.getElementById('modalProjectCategory');
+    const modalDescription = document.getElementById('modalProjectDescription');
+    const modalFeatures = document.getElementById('modalProjectFeatures');
+    const modalVisit = document.getElementById('modalProjectVisit');
+    let lastModalTrigger = null;
+    function openProjectModal(key, trigger) {
+      const project = projectDetails[key];
+      if (!project) return;
+      lastModalTrigger = trigger;
+      modalTitle.textContent = project.title;
+      modalSymbol.textContent = project.symbol;
+      modalCategory.textContent = project.category;
+      modalDescription.textContent = project.description;
+      modalFeatures.replaceChildren(...project.features.map(feature => {
+        const chip = document.createElement('span');
+        chip.textContent = feature;
+        return chip;
+      }));
+      modalVisit.href = project.url;
+      projectModal.classList.add('is-open');
+      projectModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      modalPanel.focus();
+    }
+    function closeProjectModal() {
+      if (!projectModal.classList.contains('is-open')) return;
+      projectModal.classList.remove('is-open');
+      projectModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastModalTrigger) lastModalTrigger.focus();
+    }
     document.querySelectorAll('[data-details]').forEach(button => {
-      button.addEventListener('click', () => {
-        const message = projectDetails[button.dataset.details];
-        if (message) window.alert(message);
-      });
+      button.addEventListener('click', () => openProjectModal(button.dataset.details, button));
+    });
+    projectModal.querySelectorAll('[data-close-modal]').forEach(element => element.addEventListener('click', closeProjectModal));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeProjectModal();
     });
 
     document.getElementById('year').textContent = new Date().getFullYear();
