@@ -172,6 +172,40 @@
     @media (max-width: 520px) { .project-modal { padding: 12px; } .project-modal-panel { border-radius: 23px; max-height: 92vh; } .modal-hero { padding: 23px 21px 22px; } .modal-content { padding: 23px 21px 24px; } .modal-title-row { gap: 12px; } .modal-project-symbol { width: 55px; height: 55px; flex-basis: 55px; border-radius: 16px; } .modal-footer { align-items: stretch; } .modal-actions { width: 100%; } .modal-actions .btn { flex: 1; } }
     @media (prefers-reduced-motion: reduce) { .project-modal, .project-modal-panel, .modal-close { transition: none; } }
 
+
+
+    /* Finitions responsive et cartes de compétences interactives */
+    .skill-card-button { width: 100%; text-align: left; color: var(--text); font: inherit; cursor: pointer; display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+    .skill-card-button .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 17px; }
+    .skill-more { display: inline-flex; gap: 7px; align-items: center; margin-top: 18px; color: var(--accent); font-size: 12px; font-weight: 800; }
+    .skill-card-button:focus-visible, .text-link:focus-visible, .btn:focus-visible, .icon-btn:focus-visible, .menu-btn:focus-visible, .modal-close:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 3px; }
+    .container { width: min(1120px, calc(100% - 48px)); }
+    .section { padding-block: clamp(62px, 7vw, 92px); }
+    .section-head { margin-bottom: clamp(28px, 4vw, 44px); }
+    .skill-card, .project-card, .timeline-card, .contact-card { padding: clamp(21px, 2.6vw, 28px); }
+    .project-modal-panel { overscroll-behavior: contain; }
+    body.modal-open { overflow: hidden; }
+    @media (max-width: 650px) {
+      .container { width: min(100% - 32px, 540px); }
+      .nav { gap: 10px; }
+      .brand { font-size: 16px; gap: 8px; }
+      .brand-mark { width: 35px; height: 35px; }
+      .nav-actions { gap: 7px; }
+      .icon-btn, .menu-btn { width: 40px; height: 40px; }
+      .hero-art { max-width: 100%; }
+      .floating-tag { max-width: 48%; font-size: 11px; }
+      .project-top { gap: 10px; }
+    }
+    @media (max-width: 380px) {
+      .container { width: calc(100% - 26px); }
+      h1 { letter-spacing: -2px; }
+      .profile-meta { gap: 7px; }
+      .meta-item { padding: 11px 9px; }
+      .modal-title-row { align-items: flex-start; }
+      .modal-title-row h2 { overflow-wrap: anywhere; }
+      .modal-actions { flex-direction: column; }
+    }
+
     @media (max-width: 850px) {
       .hero { min-height: auto; padding: 60px 0 50px; }
       .hero-grid { grid-template-columns: 1fr .8fr; gap: 25px; }
@@ -282,36 +316,48 @@
           <p>Les domaines que j'explore et les outils que je mobilise dans mes projets et mes exercices pratiques.</p>
         </div>
         <div class="skills-grid">
-          <article class="skill-card reveal">
-            <div class="skill-icon">&lt;/&gt;</div><h3>Développement web</h3>
-            <p>Création de pages web, interfaces adaptatives et petites applications interactives.</p>
-            <div class="chips"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Responsive</span></div>
-          </article>
-          <article class="skill-card reveal">
-            <div class="skill-icon">W</div><h3>WordPress</h3>
-            <p>Découverte de la création et de la personnalisation de sites avec un CMS.</p>
-            <div class="chips"><span>WordPress</span><span>Sites web</span></div>
-          </article>
-          <article class="skill-card reveal">
-            <div class="skill-icon">λ</div><h3>Algorithmique</h3>
-            <p>Résolution de problèmes, pseudo-code et bases de la logique de programmation.</p>
-            <div class="chips"><span>Conditions</span><span>Boucles</span><span>Tableaux</span></div>
-          </article>
-          <article class="skill-card reveal">
-            <div class="skill-icon">⌘</div><h3>Systèmes informatiques</h3>
-            <p>Découverte des systèmes d'exploitation et utilisation de la ligne de commande.</p>
-            <div class="chips"><span>Linux</span><span>Windows</span><span>Terminal</span></div>
-          </article>
-          <article class="skill-card reveal">
-            <div class="skill-icon">⌁</div><h3>Réseaux & cybersécurité</h3>
-            <p>Étude des réseaux, des protocoles et des bases de la sécurité informatique.</p>
-            <div class="chips"><span>TCP/IP</span><span>Packet Tracer</span><span>Wireshark</span></div>
-          </article>
-          <article class="skill-card reveal">
-            <div class="skill-icon">✧</div><h3>Apprentissage continu</h3>
-            <p>Je progresse en pratiquant, en documentant mes essais et en améliorant mes réalisations.</p>
-            <div class="chips"><span>Curiosité</span><span>Projets pratiques</span></div>
-          </article>
+          <button class="skill-card skill-card-button reveal" type="button" data-details="skill-dev" aria-haspopup="dialog">
+            <span class="skill-icon" aria-hidden="true">⌘</span><h3>Développement</h3>
+            <p>Bases en langage C et apprentissage progressif du développement web. HTML, CSS et JavaScript sont en cours d’apprentissage.</p>
+            <span class="chips"><span>Langage C</span><span>HTML · apprentissage</span><span>CSS · apprentissage</span><span>JavaScript · apprentissage</span></span>
+            <span class="skill-more">Voir les détails <span aria-hidden="true">↗</span></span>
+          </button>
+          <button class="skill-card skill-card-button reveal" type="button" data-details="skill-cyber" aria-haspopup="dialog">
+            <span class="skill-icon" aria-hidden="true">⌁</span><h3>Cybersécurité & réseaux</h3>
+            <p>Exploration des réseaux et de la sécurité informatique, avec une pratique approfondie de Nmap pour la reconnaissance et l’analyse de réseaux dans un cadre autorisé.</p>
+            <span class="chips"><span>Nmap · avancé</span><span>Réseaux</span><span>Reconnaissance</span></span>
+            <span class="skill-more">Voir les détails <span aria-hidden="true">↗</span></span>
+          </button>
+          <button class="skill-card skill-card-button reveal" type="button" data-details="skill-design" aria-haspopup="dialog">
+            <span class="skill-icon" aria-hidden="true">✦</span><h3>Design graphique</h3>
+            <p>Création d’affiches et de logos. Utilisation de Photoshop à un niveau intermédiaire pour préparer et retoucher des visuels.</p>
+            <span class="chips"><span>Affiches</span><span>Logos</span><span>Photoshop · intermédiaire</span></span>
+            <span class="skill-more">Voir les détails <span aria-hidden="true">↗</span></span>
+          </button>
+          <button class="skill-card skill-card-button reveal" type="button" data-details="skill-office" aria-haspopup="dialog">
+            <span class="skill-icon" aria-hidden="true">▤</span><h3>Bureautique</h3>
+            <p>Bonne maîtrise de Microsoft Word et PowerPoint pour produire des documents et des présentations. Excel reste un axe de progression.</p>
+            <span class="chips"><span>Word · bonne maîtrise</span><span>PowerPoint · bonne maîtrise</span><span>Excel · à améliorer</span></span>
+            <span class="skill-more">Voir les détails <span aria-hidden="true">↗</span></span>
+          </button>
+          <button class="skill-card skill-card-button reveal" type="button" data-details="skill-video" aria-haspopup="dialog">
+            <span class="skill-icon" aria-hidden="true">▶</span><h3>Montage vidéo</h3>
+            <p>Montage et édition de vidéos, avec une attention portée à l’enchaînement des séquences et à la cohérence du rendu.</p>
+            <span class="chips"><span>Montage</span><span>Édition vidéo</span></span>
+            <span class="skill-more">Voir les détails <span aria-hidden="true">↗</span></span>
+          </button>
+          <button class="skill-card skill-card-button reveal" type="button" data-details="skill-community" aria-haspopup="dialog">
+            <span class="skill-icon" aria-hidden="true">◎</span><h3>Community management</h3>
+            <p>Gestion de comptes et de pages sur les réseaux sociaux : organisation des publications et suivi de la présence en ligne.</p>
+            <span class="chips"><span>Réseaux sociaux</span><span>Gestion de pages</span></span>
+            <span class="skill-more">Voir les détails <span aria-hidden="true">↗</span></span>
+          </button>
+          <button class="skill-card skill-card-button reveal" type="button" data-details="skill-teaching" aria-haspopup="dialog">
+            <span class="skill-icon" aria-hidden="true">↗</span><h3>Formation & transmission</h3>
+            <p>Capacité à expliquer et enseigner les notions maîtrisées, en avançant étape par étape avec des exemples pratiques.</p>
+            <span class="chips"><span>Pédagogie</span><span>Explications</span><span>Apprentissage pratique</span></span>
+            <span class="skill-more">Voir les détails <span aria-hidden="true">↗</span></span>
+          </button>
         </div>
       </div>
     </section>
@@ -409,7 +455,7 @@
         <div class="modal-divider"></div>
         <p class="modal-section-label">Ce que l'on y retrouve</p>
         <div class="modal-features" id="modalProjectFeatures"></div>
-        <div class="modal-footer"><span class="modal-note">Un projet qui évolue avec la pratique ✦</span><div class="modal-actions"><button class="btn" type="button" data-close-modal>Fermer</button><a class="btn btn-primary" id="modalProjectVisit" href="#" target="_blank" rel="noopener noreferrer">Découvrir le projet ↗</a></div></div>
+        <div class="modal-footer"><span class="modal-note" id="modalProjectNote">Un projet qui évolue avec la pratique ✦</span><div class="modal-actions"><button class="btn" type="button" data-close-modal>Fermer</button><a class="btn btn-primary" id="modalProjectVisit" href="#" target="_blank" rel="noopener noreferrer">Découvrir le projet ↗</a></div></div>
       </div>
     </section>
   </div>
@@ -477,6 +523,13 @@
       doxantuu: { title: 'DOXANTUU', symbol: 'D', category: 'E-commerce · Boutique en ligne', description: 'DOXANTUU est une boutique de chaussures en ligne que je développe et améliore progressivement. L’objectif est de proposer une expérience d’achat claire, agréable sur mobile comme sur ordinateur, et une interface de gestion adaptée à la boutique.', features: ['Catalogue de chaussures', 'Expérience responsive', 'Interface d’administration', 'Projet en évolution'], url: 'https://doxantuu.netlify.app/' },
       algocli: { title: 'AlgoCLI', symbol: 'A', category: 'Éducation · Algorithmique', description: 'AlgoCLI est un projet pédagogique pensé pour rendre l’apprentissage de l’algorithmique et du pseudo-code plus pratique. Il sert de support pour s’entraîner, tester sa compréhension et progresser étape par étape.', features: ['Algorithmique', 'Pseudo-code', 'Apprentissage pratique', 'Exercices'], url: 'https://algorithme.oneapp.dev/' },
       analyse: { title: 'Analyse SIMAC', symbol: '∑', category: 'Éducation · Analyse', description: 'Analyse SIMAC est une plateforme pédagogique conçue pour faciliter l’accès aux contenus de cours et aux exercices d’analyse. Le projet vise à réunir les ressources utiles dans un espace organisé pour accompagner les révisions.', features: ['Cours regroupés', 'Exercices d’analyse', 'Révisions', 'Organisation des ressources'], url: 'https://analyse_simac.oneapp.dev/' },
+      'skill-dev': { title: 'Développement', symbol: '</>', category: 'Compétence · En apprentissage', description: 'Je possède des bases en langage C et je développe progressivement mes compétences en création web. HTML, CSS et JavaScript sont des technologies que je suis encore en train d’apprendre et de pratiquer à travers mes projets.', features: ['Langage C', 'HTML · apprentissage', 'CSS · apprentissage', 'JavaScript · apprentissage'], url: 'https://portfolio1-omega-opal.vercel.app/' },
+      'skill-cyber': { title: 'Cybersécurité & réseaux', symbol: '⌁', category: 'Compétence · Nmap avancé', description: 'Je m’intéresse à la sécurité informatique et aux réseaux. Nmap est l’outil que je pratique à un niveau avancé pour découvrir les hôtes et analyser les services exposés, uniquement sur des systèmes pour lesquels j’ai une autorisation.', features: ['Nmap · avancé', 'Réseaux', 'Analyse de services', 'Pratique responsable'], url: 'https://portfolio1-omega-opal.vercel.app/' },
+      'skill-design': { title: 'Design graphique', symbol: '✦', category: 'Compétence · Création visuelle', description: 'Je crée des affiches et des logos. J’utilise Photoshop à un niveau intermédiaire pour concevoir, retoucher et organiser des éléments visuels.', features: ['Création d’affiches', 'Création de logos', 'Photoshop · intermédiaire'], url: 'https://portfolio1-omega-opal.vercel.app/' },
+      'skill-office': { title: 'Bureautique', symbol: '▤', category: 'Compétence · Outils bureautiques', description: 'Je maîtrise bien Microsoft Word et PowerPoint pour la rédaction de documents et la création de présentations. Je continue à améliorer mon niveau sur Excel.', features: ['Word · bonne maîtrise', 'PowerPoint · bonne maîtrise', 'Excel · en progression'], url: 'https://portfolio1-omega-opal.vercel.app/' },
+      'skill-video': { title: 'Montage vidéo', symbol: '▶', category: 'Compétence · Audiovisuel', description: 'Je réalise du montage et de l’édition vidéo, en assemblant les séquences et en travaillant la fluidité et la cohérence du résultat.', features: ['Montage vidéo', 'Édition', 'Assemblage de séquences'], url: 'https://portfolio1-omega-opal.vercel.app/' },
+      'skill-community': { title: 'Community management', symbol: '◎', category: 'Compétence · Réseaux sociaux', description: 'Je peux gérer des comptes et des pages sur les réseaux sociaux, organiser les publications et contribuer à maintenir une présence cohérente en ligne.', features: ['Gestion de comptes', 'Gestion de pages', 'Organisation des publications'], url: 'https://portfolio1-omega-opal.vercel.app/' },
+      'skill-teaching': { title: 'Formation & transmission', symbol: '↗', category: 'Compétence · Pédagogie', description: 'Je peux transmettre les notions que je maîtrise en les expliquant étape par étape et en m’appuyant sur des exemples pratiques adaptés au niveau de la personne.', features: ['Explication de notions', 'Exemples pratiques', 'Transmission des connaissances'], url: 'https://portfolio1-omega-opal.vercel.app/' },
       architecture: { title: 'Architecture des ordinateurs', symbol: '01', category: 'Informatique · Apprentissage', description: 'Cette plateforme rassemble des ressources consacrées à l’architecture des ordinateurs et à la représentation de l’information. Elle accompagne l’apprentissage de notions informatiques à travers des contenus et des exercices.', features: ['Représentation de l’information', 'Systèmes numériques', 'Architecture informatique', 'Support de révision'], url: 'https://architecture_des_ordinateurs.oneapp.dev/' }
     };
     const projectModal = document.getElementById('projectModal');
@@ -487,6 +540,7 @@
     const modalDescription = document.getElementById('modalProjectDescription');
     const modalFeatures = document.getElementById('modalProjectFeatures');
     const modalVisit = document.getElementById('modalProjectVisit');
+    const modalNote = document.getElementById('modalProjectNote');
     let lastModalTrigger = null;
     function openProjectModal(key, trigger) {
       const project = projectDetails[key];
@@ -501,6 +555,10 @@
         chip.textContent = feature;
         return chip;
       }));
+      const isSkill = key.startsWith('skill-');
+      modalVisit.style.display = isSkill ? 'none' : '';
+      modalVisit.setAttribute('aria-hidden', isSkill ? 'true' : 'false');
+      modalNote.textContent = isSkill ? 'Compétence et savoir-faire' : 'Un projet qui évolue avec la pratique ✦';
       modalVisit.href = project.url;
       projectModal.classList.add('is-open');
       projectModal.setAttribute('aria-hidden', 'false');
@@ -520,6 +578,13 @@
     projectModal.querySelectorAll('[data-close-modal]').forEach(element => element.addEventListener('click', closeProjectModal));
     document.addEventListener('keydown', event => {
       if (event.key === 'Escape') closeProjectModal();
+      if (event.key === 'Tab' && projectModal.classList.contains('is-open')) {
+        const focusable = [...projectModal.querySelectorAll('button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])')].filter(el => el.offsetParent !== null);
+        if (!focusable.length) return;
+        const first = focusable[0], last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      }
     });
 
     document.getElementById('year').textContent = new Date().getFullYear();
